@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* SARAL FREIGHT MANAGEMENT Design System
+All colors MUST be HSL. Base color: #0A1E3F
+*/
+
+@layer base {
+  :root {
+    /* Base Colors */
+    --background: 0 0% 100%;
+    --foreground: 218 100% 15%;
+
+    /* Brand Colors - Based on #0A1E3F */
+    --primary: 218 100% 15%; /* #0A1E3F */
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 218 70% 25%;
+    --primary-dark: 218 100% 10%;
+
+    /* Accent Colors - Orange for CTAs */
+    --accent: 25 95% 53%; /* Orange #FF7A00 */
+    --accent-foreground: 0 0% 100%;
+    --accent-light: 25 95% 63%;
+    --accent-dark: 25 95% 43%;
+
+    /* Card & UI Elements */
+    --card: 0 0% 100%;
+    --card-foreground: 218 100% 15%;
+    --card-alt: 218 30% 96%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 218 100% 15%;
+
+    /* Secondary Colors */
+    --secondary: 218 30% 96%;
+    --secondary-foreground: 218 100% 15%;
+
+    --muted: 220 15% 95%;
+    --muted-foreground: 218 15% 45%;
+
+    /* Utility Colors */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 90%;
+    --input: 220 15% 90%;
+    --ring: 218 100% 15%;
+
+    /* Design System Variables */
+    --radius: 0.75rem;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-light)) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(var(--accent)) 0%, hsl(var(--accent-light)) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-dark)) 100%);
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(var(--primary) / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(var(--primary) / 0.1);
+    --shadow-lg: 0 10px 15px -3px hsl(var(--primary) / 0.1);
+    --shadow-xl: 0 20px 25px -5px hsl(var(--primary) / 0.1);
+
+    /* Transitions */
+    --transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Dark mode with SARAL branding */
+    --background: 218 100% 8%;
+    --foreground: 0 0% 95%;
+
+    --card: 218 80% 12%;
+    --card-foreground: 0 0% 95%;
+    --card-alt: 218 60% 18%;
+
+    --popover: 218 80% 12%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 0 0% 95%;
+    --primary-foreground: 218 100% 15%;
+    --primary-light: 220 15% 85%;
+    --primary-dark: 0 0% 85%;
+
+    --secondary: 218 40% 20%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 218 20% 25%;
+    --muted-foreground: 220 15% 65%;
+
+    --accent: 25 95% 53%;
+    --accent-foreground: 0 0% 100%;
+    --accent-light: 25 95% 63%;
+    --accent-dark: 25 95% 43%;
+
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 218 30% 25%;
+    --input: 218 30% 25%;
+    --ring: 25 95% 53%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
