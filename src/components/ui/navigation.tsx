@@ -9,153 +9,124 @@ const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
-  const navItems = [
-    { name: "Home", path: "/" },
-    { name: "About Us", path: "/about" },
-    { name: "Services", path: "/services" },
-    { name: "Contact", path: "/contact" },
-  ];
-
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const isActivePath = (path: string) => {
-    return location.pathname === path;
-  };
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  const closeMenu = () => setIsMenuOpen(false);
+
+  const menuItems = [
+    { name: "Home", path: "/" },
+    { name: "About Us", path: "/about" },
+    { name: "Services", path: "/services" },
+    { name: "Contact Us", path: "/contact" },
+  ];
 
   return (
-    <>
-      {/* Combined Header */}
-      <header
-        className={`fixed top-0 w-full transition-all duration-300 z-50 ${
-          isScrolled ? "backdrop-blur-md shadow-lg bg-primary/40" : "bg-transparent"
-        }`}
-      >
-        {/* Top Contact Bar */}
-        <div className="py-2 px-4 hidden md:block border-b border-white/10">
-          <div className="container mx-auto flex justify-between items-center text-sm text-white">
-            <div className="flex items-center space-x-6">
-              <div className="flex items-center space-x-2">
-                <Phone size={14} />
-                <span>+65 1234 5678</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Mail size={14} />
-                <span>info@saralfreight.com</span>
-              </div>
-            </div>
-            <div className="text-sm">Social Network</div>
-          </div>
+    <header
+      className={`fixed top-0 w-full transition-all duration-300 z-[9999] ${
+        isScrolled ? "backdrop-blur-md shadow-lg bg-[#0A1E3F]/90" : "bg-transparent"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto flex items-center justify-between p-4 md:p-6">
+        {/* Logo */}
+        <Link to="/" onClick={closeMenu}>
+          <img src={saralLogo} alt="Saral Freight Management Logo" className="h-12 md:h-14" />
+        </Link>
+
+        {/* Desktop Menu */}
+        <nav className="hidden md:flex items-center space-x-8">
+          {menuItems.map((item) => (
+            <Link
+              key={item.name}
+              to={item.path}
+              onClick={closeMenu}
+              className={`text-white hover:text-[#FBBF24] transition-colors ${
+                location.pathname === item.path ? "font-bold underline underline-offset-4" : ""
+              }`}
+            >
+              {item.name}
+            </Link>
+          ))}
+        </nav>
+
+        {/* Contact Info (Desktop Only) */}
+        <div className="hidden md:flex items-center space-x-4">
+          <a href="tel:+6567499808" className="flex items-center text-white hover:text-[#FBBF24]">
+            <Phone className="h-5 w-5 mr-1" /> +65 6749 9808
+          </a>
+          <a
+            href="mailto:ops@saralasia.com"
+            className="flex items-center text-white hover:text-[#FBBF24]"
+          >
+            <Mail className="h-5 w-5 mr-1" /> ops@saralasia.com
+          </a>
+          <Button
+          variant="default"
+          className="bg-[#FBBF24] hover:bg-[#D97706] text-black px-4 py-2 rounded-lg shadow-lg"
+          onClick={() => {
+            if (location.pathname !== "/") {
+               window.location.href = "/#contact";
+              } else {
+                document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })
+              }
+              }}
+              >
+                Get a Quote
+                </Button>
+
         </div>
 
-        {/* Main Navigation */}
-        <nav className="w-full relative z-[1000]">
-          <div className="container mx-auto px-4">
-            <div className="flex justify-between items-center py-4">
-              {/* Logo */}
-              <Link to="/" className="flex items-center space-x-3">
-                <img
-                  src={saralLogo}
-                  alt="SARAL FREIGHT MANAGEMENT"
-                  className="h-12 w-23 object-contain"
-                />
-              </Link>
+        {/* Mobile Menu Toggle */}
+        <button
+          onClick={toggleMenu}
+          className="md:hidden p-2 rounded-lg text-white hover:bg-white/10"
+          aria-label="Toggle Menu"
+        >
+          {isMenuOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
+        </button>
+      </div>
 
-              {/* Desktop Navigation */}
-              <div className="hidden md:flex items-center space-x-8">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.path}
-                    onClick={() =>
-                      window.scrollTo({ top: 0, behavior: "smooth" })
-                    }
-                    className="text-white hover:text-accent transition-colors font-medium relative"
-                  >
-                    {item.name}
-                    {isActivePath(item.path) && (
-                      <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-accent"></div>
-                    )}
-                  </Link>
-                ))}
-                <Button
-                  variant="default"
-                  className="bg-[#FF6B00] hover:bg-[#e65f00] text-white px-6 py-3 rounded-lg shadow-md"
-                  onClick={() => {
-                    if (location.pathname !== "/") {
-                      window.location.href = "/#contact";
-                    } else {
-                      document
-                        .getElementById("contact")
-                        ?.scrollIntoView({ behavior: "smooth" });
-                    }
-                  }}
-                >
-                  Get a Quote
-                </Button>
-              </div>
-
-              {/* Mobile Menu Button */}
-              <button
-                className="md:hidden p-2 text-white relative z-[9999]"
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="md:hidden bg-[#0A1E3F]/95 backdrop-blur-md shadow-lg">
+          <nav className="flex flex-col space-y-4 px-6 py-4">
+            {menuItems.map((item) => (
+              <Link
+                key={item.name}
+                to={item.path}
+                onClick={closeMenu}
+                className={`text-white hover:text-[#FBBF24] transition-colors ${
+                  location.pathname === item.path ? "font-bold underline underline-offset-4" : ""
+                }`}
               >
-                {isMenuOpen ? <X size={26} /> : <Menu size={26} />}
-              </button>
+                {item.name}
+              </Link>
+            ))}
+            <div className="flex flex-col space-y-2 mt-4">
+              <a href="tel:+6567499808" className="flex items-center text-white hover:text-[#FBBF24]">
+                <Phone className="h-5 w-5 mr-1" /> +65 6749 9808
+              </a>
+              <a
+                href="mailto:ops@saralasia.com"
+                className="flex items-center text-white hover:text-[#FBBF24]"
+              >
+                <Mail className="h-5 w-5 mr-1" /> ops@saralasia.com
+              </a>
+              <Button className="bg-[#FBBF24] hover:bg-[#D97706] text-black px-4 py-2 rounded-lg shadow-lg w-full">
+                Track Shipment
+              </Button>
             </div>
-
-            {/* Mobile Navigation */}
-            {isMenuOpen && (
-              <div className="md:hidden border-t border-white/10 bg-primary/90 backdrop-blur-md z-50 relative">
-                <div className="py-4 space-y-2">
-                  {navItems.map((item) => (
-                    <Link
-                      key={item.name}
-                      to={item.path}
-                      className={`block px-4 py-3 text-white hover:text-accent hover:bg-white/10 transition-colors ${
-                        isActivePath(item.path)
-                          ? "text-accent bg-white/10"
-                          : ""
-                      }`}
-                      onClick={() => {
-                        setIsMenuOpen(false);
-                        window.scrollTo({ top: 0, behavior: "smooth" });
-                      }}
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                  <div className="px-4 py-3">
-                    <Button
-                      variant="default"
-                      className="w-full bg-[#FF6B00] hover:bg-[#e65f00] text-white px-6 py-3 rounded-lg shadow-md"
-                      onClick={() => {
-                        setIsMenuOpen(false);
-                        if (location.pathname !== "/") {
-                          window.location.href = "/#contact";
-                        } else {
-                          document
-                            .getElementById("contact")
-                            ?.scrollIntoView({ behavior: "smooth" });
-                        }
-                      }}
-                    >
-                      Get a Quote
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        </nav>
-      </header>
-    </>
+          </nav>
+        </div>
+      )}
+    </header>
   );
 };
 
