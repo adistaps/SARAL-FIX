@@ -36,7 +36,7 @@ const HeroSection = () => {
         <div className="max-w-4xl mx-auto">
           {/* Badge */}
           <div className="inline-flex items-center space-x-2 bg-accent/20 backdrop-blur-sm border border-accent/30 rounded-full px-4 py-1.5 mb-4 sm:px-6 sm:py-2">
-            <Plane size={14} className="sm:size-16" />
+            <Plane size={10} className="sm:size-12" />
             <span className="text-xs sm:text-sm font-medium">
               We Are Specialists In Freight Transportation
             </span>

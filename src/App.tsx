@@ -19,19 +19,21 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/services/air-charter" element={<AirCharter />} />
-          <Route path="/services/airfreight" element={<Airfreight />} />
-          <Route path="/services/project-cargo" element={<ProjectCargo />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      {/* 🚀 Bungkus dengan overflow-x-hidden biar tidak bisa geser ke kanan */}
+      <div className="overflow-x-hidden">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/services/air-charter" element={<AirCharter />} />
+            <Route path="/services/airfreight" element={<Airfreight />} />
+            <Route path="/services/project-cargo" element={<ProjectCargo />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
     </TooltipProvider>
   </QueryClientProvider>
 );
