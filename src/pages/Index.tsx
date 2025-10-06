@@ -14,11 +14,11 @@ const Index = () => {
       <Navigation />
       <div className="pt-0">
         <HeroSection />
+        <ContactFormSection />  {/* Dipindah ke sini */}
         <AboutSection />
         <ServicesSection />
         <HowItWorksSection />
         <CarouselSection />
-        <ContactFormSection />
         <PartnersSection />
         <Footer />
       </div>
